@@ -2,6 +2,12 @@
 session_start();
 require_once "navbar.html";
 
+if (!isset($_SESSION['logged_in']))
+{
+	header('Location: index.php');
+	exit();
+}
+
 require_once "connect.php";
 
 //setting today's date
@@ -73,7 +79,7 @@ $all_OK=true;
 <form method="post">	
 	<div class="income-container col-md-12">
 	
-	<div class="box3 col-md-3 amountDate">
+	<div class="box3 col-md-3 amountDate table-transactions">
 			<fieldset class="field_set">
 								
 									<legend><b>KWOTA</b></legend>
@@ -128,7 +134,7 @@ $all_OK=true;
 			</div>
 			
 			
-			<div class="box2 col-md-5 category">
+			<div class="box2 col-md-5 category table-transactions">
 				<fieldset class="field_set">
 								
 									<legend class="name-of-area"><b>KATEGORIA</b></legend>
@@ -173,7 +179,7 @@ $all_OK=true;
 			
 			</div>
 	
-		<div class="box col-md-3 comment">
+		<div class="box col-md-3 comment table-transactions">
 			
 				<fieldset class="field_set ">
 								

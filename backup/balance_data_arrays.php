@@ -1,10 +1,5 @@
 <?php
-if (!isset($_SESSION['logged_in']))
-{
-	header('Location: index.php');
-	exit();
-}
-
+require_once "connect.php";
 
 $connection = @new mysqli ($host, $db_user, $db_password, $db_name);
 	if(!$connection){
@@ -14,7 +9,7 @@ $connection = @new mysqli ($host, $db_user, $db_password, $db_name);
 			$connection->query("SET NAMES 'utf8'");
 			
 			//expenses
-			$sql=("SELECT c.name, count(*) as e.amount FROM expenses_category_assigned_to_users AS c INNER JOIN expenses AS e ON c.id = e.expense_category_assigned_to_user_id WHERE c.user_id='$user_id';");
+			$sql=("SELECT c.name, e.amount FROM expenses_category_assigned_to_users AS c INNER JOIN expenses AS e ON c.id = e.expense_category_assigned_to_user_id WHERE c.user_id='$user_id';");
 				$result = $connection->query($sql);
 				
 				if (!$result) throw new Exception($connection->error);
